@@ -1,0 +1,114 @@
+{% load markdown_deux_tags %}
+
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Вакансии компании | Джуманджи</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <style>
+    body {
+      background-color: #F6F2E6;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="container mt-3">
+      {% include 'navbar.html' %}
+  </header>
+
+  <main class="container mt-3 pb-5">
+    <div class="row mt-5">
+      <div class="col-12 col-lg-4">
+        <aside class="pt-3 pb-4 px-4 mb-5 card">
+          <h1 class="h4 pt-2 pb-2">Моя компания</h1>
+          <div class="nav flex-column nav-pills">
+            <a class="nav-link" href="/mycompany/">1. Информация о&nbsp;компании</a>
+            <a class="nav-link active" href="/mycompany/vacancies">2. Вакансии</a>
+          </div>
+        </aside>
+      </div>
+      <div class="col-12 col-lg-8">
+        <div class="card">
+          <div class="card-body px-4 pb-4 tab-content">
+            <!-- Tab -->
+            <section>
+              <h2 class="h4 pt-2 pb-3">{{ vacancy.title }}</h2>
+              <form method="post" action="/mycompany/vacancies/{{ vacancy.id }}/">{% csrf_token %}
+                <div class="row">
+                  <div class="col-12 col-md-6">
+                    <div class="form-group pb-2">
+                      <label class="mb-2 text-dark" for="vacancyTitle">{{ form.title.label_tag }}</label>
+                      {{ form.title }}
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <div class="form-group pb-2">
+                      <label class="mb-2 text-dark" for="userSpecialization">{{ form.speciality.label_tag }}</label>
+                        {{ form.speciality }}
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12 col-md-6">
+                    <div class="form-group pb-2">
+                      <label class="mb-2 text-dark" for="vacancySalaryMin">{{ form.salary_min.label_tag }}</label>
+                      {{ form.salary_min }}
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <div class="form-group pb-2">
+                      <label class="mb-2" for="vacancySalaryMax">{{ form.salary_max.label_tag }}</label>
+                      {{ form.salary_max }}
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group pb-2">
+                  <label class="mb-2 text-dark" for="vacancySkills">{{ form.skills.label_tag }}</label>
+                  {{ form.skills }}
+                </div>
+                <div class="form-group pb-2">
+                  <label class="mb-2 text-dark" for="vacancyDescription">{{ form.description.label_tag }}</label>
+                  {{ form.description }}
+                </div>
+                <div class="form-group">
+                  <input type="submit" class="btn btn-info" value="Сохранить">
+                </div>
+              </form>
+              <!-- END Vacancy info -->
+              <!-- Applications -->
+            {% if vacancy.id %}
+                <h2 class="h4 pt-2 pb-3">Отклики - {{ applications.count }}</h2>
+              <!-- Application 1 -->
+                {% for application in applications %}
+                  <div class="card mt-3">
+                    <div class="card-body px-4">
+                      <p class="mb-1 font-weight-bold">{{ application.written_username }}</p>
+                      <p class="mb-2"><a href="tel:{{ application.written_phone }}" class="text-dark">{{ application.written_phone }}</a></p>
+                      <p class="mb-1">{{ application.written_cover_letter }}</p>
+                        {% if application.user.resume.exists %}
+                            <br>
+                            <a class="btn btn-info" href="/resume/{{ application.user.id }}/" role="button">Посмотреть резюме</a>
+                        {% else %}
+                            <p class="mb-1 font-weight-bold">Соискатель не оставил резюме</p>
+                        {% endif %}
+                    </div>
+                  </div>
+                {% endfor %}
+            {% endif %}
+            </section>
+            <!-- END Tab -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

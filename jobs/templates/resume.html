@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Просмотр резюме | Джуманджи</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <style>
+    body {
+      background-color: #F6F2E6;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="container mt-3">
+    {% include 'navbar.html' %}
+  </header>
+
+  <main class="container mt-3 pb-5">
+    <section class="col-12 col-lg-6 offset-lg-3 mt-5 card">
+      <div class="card-body px-3 pb-4">
+        <div class="d-flex align-items-baseline align-content-baseline">
+              <h1 class="h2 mt-4 font-weight-bold">Резюме</h1>
+          </div>
+        <form>
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <div class="form-group pb-2">
+                <label class="mb-2 text-dark font-weight-bold" for="userName">Имя</label>
+                <p class="mt-2">{{ resume.name }}</p>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="form-group pb-2">
+                <label class="mb-2 text-dark font-weight-bold" for="userSurname">Фамилия</label>
+                  <p class="mt-2">{{ resume.surname }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <div class="form-group pb-2">
+                <label class="mb-2 text-dark font-weight-bold" for="userReady">Готовность к работе</label>
+                  <p class="mt-2">{{ resume_status.label }}</p>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="form-group pb-2">
+                <label class="mb-2 text-dark font-weight-bold" for="userPortfolio">Ожидаемая зарплата</label>
+                  <p class="mt-2">{{ resume.salary }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <div class="form-group pb-2">
+                <label class="mb-2 text-dark font-weight-bold" for="userSpecialization">Специализация</label>
+                  <p class="mt-2">{{ resume.speciality.title }}</p>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="form-group pb-2">
+                <label class="mb-2 text-dark font-weight-bold" for="userQualification">Квалификация</label>
+                  <p class="mt-2">{{ resume_grade.label }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="form-group pb-2">
+            <label class="mb-2 text-dark font-weight-bold" for="userEducation">Образование</label>
+              <p class="mt-2">{{ resume.education|linebreaks }}</p>
+          </div>
+          <div class="form-group pb-2">
+            <label class="mb-2 text-dark font-weight-bold" for="userExperience">Опыт работы</label>
+              <p class="mt-2">{{ resume.experience|linebreaks }}</p>
+          </div>
+          <div class="form-group pb-3">
+            <label class="mb-2 text-dark font-weight-bold" for="userPortfolio">Ссылка на портфолио</label>
+              <p class="mt-2">{{ resume.portfolio }}</p>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
